@@ -2,13 +2,22 @@
   overflow: hidden;
 }
 
-.kakao-login-btn,
 .start-btn {
   display: inline-block;
   position: absolute;
   left: 50%;
   bottom: 240px;
   transform: translate(-50%, 0);
+}
+
+.start-btn button {
+  background-color: #d69cdc;
+  border: none;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 30px;
+  font-weight: bold;
+  border-radius: 8px;
 }
 
 .intro-text {
