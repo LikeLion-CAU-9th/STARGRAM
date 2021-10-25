@@ -1,0 +1,17 @@
+.rendering-container {
+  display: inline-block;
+  width: 100%;
+  max-width: 480px;
+  height: 100vh;
+  max-height: 100vh;
+  background-color: rgb(12, 17, 22);
+}
+
+@media screen and (min-width: 481px) {
+  .rendering-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

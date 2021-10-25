@@ -1,0 +1,30 @@
+.starfall-screen {
+  overflow: hidden;
+}
+
+.kakao-login-btn,
+.start-btn {
+  display: inline-block;
+  position: absolute;
+  left: 50%;
+  bottom: 240px;
+  transform: translate(-50%, 0);
+}
+
+.intro-text {
+  position: absolute;
+  width: 100%;
+  top: 46%;
+  transform: translate(0, -50%);
+  text-align: center;
+  font-family: "IM_Hyemin-Bold";
+}
+
+.intro-text .intro-title {
+  font-size: 28px;
+}
+
+.intro-text p {
+  font-size: 18px;
+  line-height: 30px;
+}
