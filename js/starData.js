@@ -1,9 +1,9 @@
 
-WIDTH = 300;
-HEIGHT = 300;
+WIDTH = 250;
+HEIGHT = 250;
 
 const drawStar = (points) =>{
-    var paper = Raphael(document.getElementById("container"),500,500);
+    var paper = Raphael(document.getElementById("container"),WIDTH,HEIGHT);
     //x축 y축에서 50px 떨어진 곳에 가로 세로 1000px인 영역
     
     const path = [];
@@ -12,17 +12,23 @@ const drawStar = (points) =>{
         path.push(points[i][0]);
         path.push(points[i][1]);
     }
+
+    const subPath = `M,${points[1][0]},${points[1][1]},L,${points[3][0]},${points[3][0]}`
+
     
     paper.path(path.join(','))
         .attr({
         "stroke" : "white",
-        'stroke-width': 5,
-        'stroke-linejoin': 'round'
+        'stroke-width': 1,
+        // 'stroke-linejoin': 'round'
     });
 
-    
-
-    
+    paper.path(subPath)
+        .attr({
+        "stroke" : "white",
+        'stroke-width': 1,
+        // 'stroke-linejoin': 'round'
+    });    
 
 };
 
@@ -67,8 +73,12 @@ const changeToXY = () => {
         const X = changeX(metaDataJson[i]["longitude"], minMaxInfo.minLon, minMaxInfo.maxLon)
         const Y = changeY(metaDataJson[i]["latitude"], minMaxInfo.minLat, minMaxInfo.maxLat)
         
-        points.push([X+50,Y+50])
+        points.push([X,Y])
     };
+
+    points.sort(function(){
+        return Math.random() - Math.random();
+    });
 
     return points;
 }
