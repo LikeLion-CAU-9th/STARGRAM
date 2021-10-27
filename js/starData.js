@@ -13,7 +13,7 @@ const drawStar = (points) =>{
         path.push(points[i][1]);
     }
 
-    const subPath = `M,${points[1][0]},${points[1][1]},L,${points[3][0]},${points[3][0]}`
+    const subPath = `M,${points[1][0]},${points[1][1]},L,${points[3][0]},${points[3][1]}`
 
     
     paper.path(path.join(','))
