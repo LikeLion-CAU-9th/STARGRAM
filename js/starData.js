@@ -19,14 +19,14 @@ const drawStar = (points) =>{
     
     paper.path(path.join(','))
         .attr({
-        "stroke" : "white",
+        "stroke" : "red",
         'stroke-width': 1,
         // 'stroke-linejoin': 'round'
     });
 
     paper.path(subPath)
         .attr({
-        "stroke" : "white",
+        "stroke" : "red",
         'stroke-width': 1,
         // 'stroke-linejoin': 'round'
     });    

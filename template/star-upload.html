@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/responsive.css" />
     <link rel="stylesheet" href="../css/style.css" />
-    
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <!-- 화면 캡쳐 CDN -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
 
     <title>Star-upload</title>
@@ -14,6 +16,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/exif-js"></script> 
     <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../js/starData.js"></script>
+    <script src="../js/starDownload.js"></script>
 
   </head>
   <body>
@@ -21,7 +24,9 @@
       <nav>
         <span class="nav-title">STARGRAM</span>
       </nav>
-
+      
+      <button id="starDownload">별자리 저장</button>
+      <!--캡쳐 영역-->
       <div id="container" class="container"></div> 
       
     </section>
