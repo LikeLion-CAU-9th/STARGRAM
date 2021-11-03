@@ -1,6 +1,7 @@
 
 WIDTH = 250;
 HEIGHT = 250;
+CLUSTER_RATE= 10;
 
 const drawStar = (points) =>{
     var paper = Raphael(document.getElementById("container"),WIDTH,HEIGHT);
@@ -100,7 +101,58 @@ window.onload = () =>{
 }
 
 const getCentroid = (points) => {
+    sumX = 0;
+    sumY = 0;
     for(let i=0; i<points.length; i++){
-        
+        sumX += points[i][0];
+        sumY += points[i][1];        
+    };
+
+    return [sumX/points.length, sumY/points.length];
+}
+
+const getDistance = (points) => {
+    let centroid = getCentroid(points);
+    
+    let pointsDis=[];
+    for(let i=0; i<points.length; i++){
+        const distance =  Math.sqrt( (centroid[0]-points[i][0])^2 + (centroid[1]-points[i][1])^2 );
+        pointsDis.push(distance)
+    };
+    return pointsDis;
+}
+
+const clustering = (points, centroid) => {
+    let clusterPoints=[];
+    
+    
+    
+    
+
+    let startLen = pointsDis.length;
+    let endLen = 0; 
+    while( startLen != endLen){
+
     }
+    // 해당 points들의 무게중심까지 거리 최대 최소
+    let pointsDis = getDistance(points);
+    
+    let disMin = pointsDis[0];
+    let disMax = pointsDis[0];
+    for(let i=0; i<pointsDis.length; i++){
+        if(pointsDis[i] > disMax){
+            disMax = pointsDis[i];
+        }
+        else if(pointsDis[i] < disMin){
+            disMin = pointsDis[i]
+        }
+    }
+
+    if(disMax/disMin > CLUSTER_RATE){
+        let maxIndex = pointsDis.indexOf(disMax)
+        pointsDis.splice(maxIndex, 1)
+    }
+    
+
+
 }
