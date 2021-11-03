@@ -27,7 +27,15 @@
             자신만의 링크를 만들어 보아요~
           </p>
           <div class="start-btn">
-            <button>시작하기<input type="file" /></button>
+            <button>
+              시작하기<input
+                type="file"
+                multiple
+                id="uploadFile"
+                onChange="uploadImgPreview();"
+                accept="image/*"
+              />
+            </button>
           </div>
         </div>
       </div>

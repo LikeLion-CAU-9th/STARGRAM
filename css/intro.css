@@ -15,15 +15,15 @@
   padding: 0 30px;
   font-weight: bold;
   border-radius: 8px;
-  cursor: pointer;
 }
 
 .start-btn button input {
-  opacity: 0;
-  width: 110px;
   position: absolute;
   left: 50%;
-  transform: translate(-50%, 40%);
+  transform: translate(-50%, 0);
+  opacity: 0;
+  width: 110px;
+  height: 40px;
 }
 
 .intro-text {
