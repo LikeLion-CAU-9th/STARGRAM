@@ -42,3 +42,9 @@
   font-size: 18px;
   line-height: 30px;
 }
+
+.uploadImg {
+  display: none;
+  width: 200px;
+  height: 200px;
+}
