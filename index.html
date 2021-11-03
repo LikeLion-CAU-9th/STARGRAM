@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="./css/intro.css" />
     <script src="./js/three.min.js"></script>
     <script src="./js/starfall.js"></script>
+    <script src="../js/counter.js"></script>
+    <script src="https://api.countapi.xyz/hit/stargram/visits?callback=countingStar "></script>
+
+
     <title>Stargram</title>
   </head>
   <body>
@@ -32,6 +36,12 @@
             <button>시작하기</button>
           </a>
         </div>
+        <br>
+        <span class="counter-text">
+        총
+        <span id="visits"></span> 
+        명이 참여했어요!
+        </span>
       </div>
     </section>
   </body>
