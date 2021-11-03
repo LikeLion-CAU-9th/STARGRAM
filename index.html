@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="./css/intro.css" />
     <script src="./js/three.min.js"></script>
     <script src="./js/starfall.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/exif-js"
+    ></script>
+    <script src="./js/intro.js"></script>
     <title>Stargram</title>
   </head>
   <body>
@@ -28,7 +33,9 @@
           </p>
           <div class="start-btn">
             <button>
-              시작하기<input
+              사진 선택
+              <input
+                id="uploadImg"
                 type="file"
                 multiple
                 id="uploadFile"
@@ -39,6 +46,7 @@
           </div>
         </div>
       </div>
+      <div id="metadata" style="display: none"></div>
     </section>
   </body>
 </html>
