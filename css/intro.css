@@ -3,11 +3,7 @@
 }
 
 .start-btn {
-  display: inline-block;
-  position: absolute;
-  left: 50%;
-  bottom: 240px;
-  transform: translate(-50%, 0);
+  margin-top: 50px;
 }
 
 .start-btn button {
