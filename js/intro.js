@@ -8,7 +8,7 @@ const afterWriting = () => {
   btn.innerHTML = "별자리 그리기";
   btn.style.backgroundColor = "#d0e78b";
   btn.addEventListener("click", (e) => {
-    location.href = "/template/mapUpload.html";
+    location.href = "./template/mapUpload.html";
   });
 };
 
