@@ -3,6 +3,7 @@ body {
   margin: 0;
   padding: 0;
   color: #efefef;
+  text-align: center;
 }
 
 nav {
@@ -18,4 +19,15 @@ nav {
 .nav-title {
   font-size: 26px;
   letter-spacing: 3px;
+}
+
+.container{
+  border:1px solid white;
+  text-align:center;
+  vertical-align: middle;
+  padding: 20px;
+  margin-top: 20px; 
+  width:300px;
+  height: 300px;
+  display:inline-block;
 }

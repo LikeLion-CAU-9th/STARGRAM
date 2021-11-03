@@ -79,7 +79,7 @@ const writeDate = () => {
     const place = document.getElementById("place").value;
     const impression = document.getElementById("impression").value;
 
- 
+    console.log(getMetaData)
     localStorage.setItem("getMetaData", getMetaData)
     localStorage.setItem("dateStart", dateStart)
     localStorage.setItem("dateEnd", dateEnd)
