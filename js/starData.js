@@ -42,6 +42,12 @@ function changeY(y, minLat, maxLat) {
     return HEIGHT * rate;  
 }
 
+// function changeY(y, minLat, minLon, maxLon) {
+//     let rate = (y - minLat) / (maxLon - minLon); 
+//     return HEIGHT * rate;  
+// }
+
+
 const changeToXY = () => {
     const metaData = localStorage.getItem("getMetaData");
     const metaDataJson = JSON.parse(metaData);
@@ -67,13 +73,14 @@ const changeToXY = () => {
         
     };
 
+    localStorage.setItem("minMaxInfo", minMaxInfo)
     console.log(minMaxInfo)
 
     for(let i=0; i<metaDataJson.length; i++){
         const X = changeX(metaDataJson[i]["longitude"], minMaxInfo.minLon, minMaxInfo.maxLon)
         const Y = changeY(metaDataJson[i]["latitude"], minMaxInfo.minLat, minMaxInfo.maxLat)
         
-        points.push([X,Y])
+        points.push([X,HEIGHT-Y])
     };
 
     points.sort(function(){
@@ -87,9 +94,13 @@ window.onload = () =>{
     const metaData = localStorage.getItem("getMetaData");
     // const dateStart = localStorage.getItem("dateStart");
     
-    const metaDataJson = JSON.parse(metaData)
-    
     const points = changeToXY()
 
     drawStar(points)
+}
+
+const getCentroid = (points) => {
+    for(let i=0; i<points.length; i++){
+        
+    }
 }
