@@ -12,8 +12,11 @@
     <script src="./js/starfall.js"></script>
     <script src="../js/counter.js"></script>
     <script src="https://api.countapi.xyz/hit/stargram/visits?callback=countingStar "></script>
-
-
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/exif-js"
+    ></script>
+    <script src="./js/intro.js"></script>
     <title>Stargram</title>
   </head>
   <body>
@@ -30,11 +33,19 @@
             특별한 여행, 특별한 장소를 기록하고 공유하는<br />
             자신만의 링크를 만들어 보아요~
           </p>
-        </div>
-        <div class="start-btn">
-          <a href="./template/photo-upload.html">
-            <button>시작하기</button>
-          </a>
+          <div class="start-btn">
+            <button>
+              사진 선택
+              <input
+                id="uploadImg"
+                type="file"
+                multiple
+                id="uploadFile"
+                onChange="uploadImgPreview();"
+                accept="image/*"
+              />
+            </button>
+          </div>
         </div>
         <br>
         <span class="counter-text">
@@ -43,6 +54,7 @@
         명이 참여했어요!
         </span>
       </div>
+      <div id="metadata" style="display: none"></div>
     </section>
   </body>
 </html>
