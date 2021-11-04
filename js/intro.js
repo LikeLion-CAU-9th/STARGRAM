@@ -1,5 +1,25 @@
-const writeDate = () => {
+function getBase64Image(img) {
+  var canvas = document.createElement("canvas");
+  canvas.width = img.width;
+  canvas.height = img.height;
+
+  var ctx = canvas.getContext("2d");
+  ctx.drawImage(img, 0, 0);
+
+  var dataURL = canvas.toDataURL("image/png");
+
+  return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+}
+
+const writeDate = (len) => {
+  const imgFile = document.querySelectorAll(".uploadImg");
+  for (let i = 0; i < len; i++) {
+    let img64 = getBase64Image(imgFile[i]);
+    let imgObj = { photo_name: imgFile[i].title, base64: img64 };
+    writeIndexedDB(imgObj);
+  }
   const getMetaData = document.getElementById("metadata").innerHTML;
+  localStorage.removeItem("getMetaData");
   localStorage.setItem("getMetaData", getMetaData);
 };
 
@@ -44,20 +64,31 @@ const uploadImgPreview = () => {
     reader.push(new FileReader());
   }
 
-  // readAsDataURL( )을 통해 파일을 읽어 들일때 onload가 실행
-  reader[fileInfo.length - 1].onload = function () {
-    for (let i = 0; i < fileInfo.length; i++) {
-      EXIF.getData(fileInfo[i], () => {
-        const tags = EXIF.getAllTags(fileInfo[i]);
-        console.log(tags);
-        metaData.push(tags);
-      });
+  for (let i = 0; i < fileInfo.length; i++) {
+    let img = document.createElement("img");
+    img.title = fileInfo[i].name;
+    img.className = "uploadImg";
+    if (i === fileInfo.length - 1) {
+      reader[i].onload = function (e) {
+        for (let i = 0; i < fileInfo.length; i++) {
+          EXIF.getData(fileInfo[i], () => {
+            const tags = EXIF.getAllTags(fileInfo[i]);
+            console.log(tags);
+            metaData.push(tags);
+          });
+        }
+        img.src = e.target.result;
+      };
+    } else {
+      reader[i].onload = function (e) {
+        img.src = e.target.result;
+      };
     }
-  };
+    document.querySelector("body").appendChild(img);
+  }
 
   for (let i = 0; i < fileInfo.length; i++) {
     if (fileInfo[i]) {
-      // readAsDataURL( )을 통해 파일의 URL을 읽어온다.
       reader[i].readAsDataURL(fileInfo[i]);
     }
   }
@@ -105,7 +136,7 @@ const uploadImgPreview = () => {
 
     const getMetaDataJson = JSON.stringify(getMetaData);
     document.getElementById("metadata").innerHTML = getMetaDataJson;
-    writeDate();
+    writeDate(fileInfo.length);
     afterWriting();
   }, 100);
 };
