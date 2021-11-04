@@ -17,6 +17,14 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../js/starData.js"></script>
     <script src="../js/starDownload.js"></script>
+    <script>
+      function copyText() {
+          var copyText = document.getElementById("myText");
+          copyText.select();
+          document.execCommand('copy');
+          alert("복사된 문자열: " + copyText.value);
+        }      
+    </script>
 
   </head>
   <body>
@@ -25,10 +33,15 @@
         <span class="nav-title">STARGRAM</span>
       </nav>
       
+      <input type="text" value="www.stagram.site" id="myText">
+      <button onclick="copyText()">url 복사</button>
+
       <button id="starDownload" data-html2canvas-ignore="true">별자리 저장</button>
       <!--캡쳐 영역-->
       <div id="container" class="container"></div> 
       
     </section>
+    
+
   </body>
 </html>
