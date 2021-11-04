@@ -15,19 +15,8 @@ const writeDate = (len) => {
   const imgFile = document.querySelectorAll(".uploadImg");
   for (let i = 0; i < len; i++) {
     let img64 = getBase64Image(imgFile[i]);
-    let img64len = img64.length;
-    let numOfCut = Math.ceil(img64len / 1000000);
-    console.log(`len: ${img64len}, noc: ${numOfCut}`);
-    for (let k = 0; k < numOfCut; k++) {
-      localStorage.removeItem("imgData" + i + "_" + k);
-      console.log(
-        `set len: ${img64.substring(k * 1000000, (k + 1) * 1000000).length}`
-      );
-      localStorage.setItem(
-        "imgData" + i + "_" + k,
-        img64.substring(k * 1000000, (k + 1) * 1000000)
-      );
-    }
+    let imgObj = { photo_name: imgFile[i].title, base64: img64 };
+    writeIndexedDB(imgObj);
   }
   const getMetaData = document.getElementById("metadata").innerHTML;
   localStorage.removeItem("getMetaData");
