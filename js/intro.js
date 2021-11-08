@@ -12,48 +12,49 @@ function getBase64Image(img) {
 }
 
 const writeDate = (len) => {
-  initIndexedDB();
-  const imgFile = document.querySelectorAll(".uploadImg");
-  for (let i = 0; i < len; i++) {
-    let img64 = getBase64Image(imgFile[i]);
-    let imgObj = { photo_name: imgFile[i].title, base64: img64 };
-    writeIndexedDB(imgObj);
-  }
-  const getMetaData = document.getElementById("metadata").innerHTML;
-  localStorage.removeItem("getMetaData");
-  localStorage.setItem("getMetaData", getMetaData);
+  return new Promise((resolve, reject) => {
+    initIndexedDB();
+    const imgFile = document.querySelectorAll(".uploadImg");
+    for (let i = 0; i < len; i++) {
+      let img64 = getBase64Image(imgFile[i]);
+      let imgObj = { photo_name: imgFile[i].title, base64: img64 };
+      writeIndexedDB(imgObj);
+    }
+    const getMetaData = document.getElementById("metadata").innerHTML;
+    localStorage.removeItem("getMetaData");
+    localStorage.setItem("getMetaData", getMetaData);
+    resolve();
+  });
 };
 
 const afterWriting = () => {
-  setTimeout(() => {
-    let needToPing = 0;
-    const photoList = JSON.parse(localStorage.getItem("getMetaData"));
-    for (let i = 0; i < photoList.length; i++) {
-      if (photoList[i]["latitude"] === "NO_WHERE") {
-        needToPing += 1;
-      }
+  let needToPing = 0;
+  const photoList = JSON.parse(localStorage.getItem("getMetaData"));
+  for (let i = 0; i < photoList.length; i++) {
+    if (photoList[i]["latitude"] === "NO_WHERE") {
+      needToPing += 1;
     }
-    if (needToPing === 0) {
-      const btn = document.querySelector(".start-btn button");
-      btn.innerHTML = "별자리 그리기";
-      btn.style.backgroundColor = "#d0e78b";
-      btn.addEventListener("click", (e) => {
-        location.href = "./template/mapUpload.html";
-      });
-    } else {
-      const introText = document.querySelector(".intro-text p");
-      introText.innerHTML =
-        `위치정보를 불러올 수 없는 사진이 ${needToPing}장 있어요.<br>` +
-        "사진을 촬영한 장소를 직접 지정해주세요!";
-      introText.style.color = "#d75a5a";
-      const btn = document.querySelector(".start-btn button");
-      btn.innerHTML = "위치 설정하기";
-      btn.style.backgroundColor = "#d75a5a";
-      btn.addEventListener("click", (e) => {
-        location.href = "./template/pinned.html";
-      });
-    }
-  }, 200);
+  }
+  if (needToPing === 0) {
+    const btn = document.querySelector(".start-btn button");
+    btn.innerHTML = "별자리 그리기";
+    btn.style.backgroundColor = "#d0e78b";
+    btn.addEventListener("click", (e) => {
+      location.href = "./template/mapUpload.html";
+    });
+  } else {
+    const introText = document.querySelector(".intro-text p");
+    introText.innerHTML =
+      `위치정보를 불러올 수 없는 사진이 ${needToPing}장 있어요.<br>` +
+      "사진을 촬영한 장소를 직접 지정해주세요!";
+    introText.style.color = "#d75a5a";
+    const btn = document.querySelector(".start-btn button");
+    btn.innerHTML = "위치 설정하기";
+    btn.style.backgroundColor = "#d75a5a";
+    btn.addEventListener("click", (e) => {
+      location.href = "./template/pinned.html";
+    });
+  }
 };
 
 const uploadImgPreview = () => {
@@ -139,7 +140,6 @@ const uploadImgPreview = () => {
 
     const getMetaDataJson = JSON.stringify(getMetaData);
     document.getElementById("metadata").innerHTML = getMetaDataJson;
-    writeDate(fileInfo.length);
-    afterWriting();
+    writeDate(fileInfo.length).then(afterWriting());
   }, 100);
 };
