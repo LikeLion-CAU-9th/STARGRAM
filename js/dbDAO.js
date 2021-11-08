@@ -40,4 +40,8 @@ const writeIndexedDB = (base64ImageObj) => {
       console.log(e.target.result);
     };
   };
+
+  const clearIndexedDB = () => {
+    indexedDB.deleteDatabase("stargramDB");
+  };
 };

@@ -12,6 +12,7 @@ function getBase64Image(img) {
 }
 
 const writeDate = (len) => {
+  clearIndexedDB();
   const imgFile = document.querySelectorAll(".uploadImg");
   for (let i = 0; i < len; i++) {
     let img64 = getBase64Image(imgFile[i]);
