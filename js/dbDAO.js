@@ -1,21 +1,21 @@
-if (!window.indexedDB) {
-  alert("현재 사용중인 Browser 환경에서는 사용할 수 없습니다.");
-} else {
-  let db;
-  let request = indexedDB.open("stargramDB", 1);
-  request.onupgradeneeded = function (e) {
-    console.log("onupgrade");
-    let db = e.target.result;
-    let objectStore = db.createObjectStore("image", { keyPath: "photo_name" });
-    objectStore.createIndex("base64", "base64", { unique: false });
-  };
-  request.onerror = function (e) {
-    console.log("Error");
-  };
-  request.onsuccess = function (e) {
-    db = this.result;
-  };
-}
+// if (!window.indexedDB) {
+//   alert("현재 사용중인 Browser 환경에서는 사용할 수 없습니다.");
+// } else {
+//   let db;
+//   let request = indexedDB.open("stargramDB", 1);
+//   request.onupgradeneeded = function (e) {
+//     console.log("onupgrade");
+//     let db = e.target.result;
+//     let objectStore = db.createObjectStore("image", { keyPath: "photo_name" });
+//     objectStore.createIndex("base64", "base64", { unique: false });
+//   };
+//   request.onerror = function (e) {
+//     console.log("Error");
+//   };
+//   request.onsuccess = function (e) {
+//     db = this.result;
+//   };
+// }
 
 const writeIndexedDB = (base64ImageObj) => {
   let request = window.indexedDB.open("stargramDB");
@@ -40,8 +40,28 @@ const writeIndexedDB = (base64ImageObj) => {
       console.log(e.target.result);
     };
   };
+};
 
-  const clearIndexedDB = () => {
-    indexedDB.deleteDatabase("stargramDB");
+const clearIndexedDB = () => {
+  indexedDB.deleteDatabase("stargramDB");
+};
+
+const initIndexedDB = () => {
+  clearIndexedDB();
+
+  let db;
+  let request = indexedDB.open("stargramDB", 1);
+  request.onupgradeneeded = function (e) {
+    console.log("onupgrade");
+    let db = e.target.result;
+    let objectStore = db.createObjectStore("image", { keyPath: "photo_name" });
+    objectStore.createIndex("base64", "base64", { unique: false });
+    console.log("onupgradeneeded");
+  };
+  request.onerror = function (e) {
+    console.log("Error");
+  };
+  request.onsuccess = function (e) {
+    db = this.result;
   };
 };
