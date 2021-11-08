@@ -25,33 +25,35 @@ const writeDate = (len) => {
 };
 
 const afterWriting = () => {
-  let needToPing = 0;
-  const photoList = JSON.parse(localStorage.getItem("getMetaData"));
-  for (let i = 0; i < photoList.length; i++) {
-    if (photoList[i]["latitude"] === "NO_WHERE") {
-      needToPing += 1;
+  setTimeout(() => {
+    let needToPing = 0;
+    const photoList = JSON.parse(localStorage.getItem("getMetaData"));
+    for (let i = 0; i < photoList.length; i++) {
+      if (photoList[i]["latitude"] === "NO_WHERE") {
+        needToPing += 1;
+      }
     }
-  }
-  if (needToPing === 0) {
-    const btn = document.querySelector(".start-btn button");
-    btn.innerHTML = "별자리 그리기";
-    btn.style.backgroundColor = "#d0e78b";
-    btn.addEventListener("click", (e) => {
-      location.href = "./template/mapUpload.html";
-    });
-  } else {
-    const introText = document.querySelector(".intro-text p");
-    introText.innerHTML =
-      `위치정보를 불러올 수 없는 사진이 ${needToPing}장 있어요.<br>` +
-      "사진을 촬영한 장소를 직접 지정해주세요!";
-    introText.style.color = "#d75a5a";
-    const btn = document.querySelector(".start-btn button");
-    btn.innerHTML = "위치 설정하기";
-    btn.style.backgroundColor = "#d75a5a";
-    btn.addEventListener("click", (e) => {
-      location.href = "./template/pinned.html";
-    });
-  }
+    if (needToPing === 0) {
+      const btn = document.querySelector(".start-btn button");
+      btn.innerHTML = "별자리 그리기";
+      btn.style.backgroundColor = "#d0e78b";
+      btn.addEventListener("click", (e) => {
+        location.href = "./template/mapUpload.html";
+      });
+    } else {
+      const introText = document.querySelector(".intro-text p");
+      introText.innerHTML =
+        `위치정보를 불러올 수 없는 사진이 ${needToPing}장 있어요.<br>` +
+        "사진을 촬영한 장소를 직접 지정해주세요!";
+      introText.style.color = "#d75a5a";
+      const btn = document.querySelector(".start-btn button");
+      btn.innerHTML = "위치 설정하기";
+      btn.style.backgroundColor = "#d75a5a";
+      btn.addEventListener("click", (e) => {
+        location.href = "./template/pinned.html";
+      });
+    }
+  }, 200);
 };
 
 const uploadImgPreview = () => {
