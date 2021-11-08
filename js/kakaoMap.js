@@ -8,8 +8,26 @@ const mapUpload = () => {
 
     var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
     
-    const metaData = localStorage.getItem("getMetaData");
-    const metaDataJson = JSON.parse(metaData);
+
+    let metaData = localStorage.getItem("getMetaData");
+    let metaDataJson = JSON.parse(metaData);
+    //메타 데이터 먼저 포인트로 바꾸기
+    let metaPoints = changeToXY("getMetaData")
+    //튀는 값 인덱스 찾기
+    let farIndex = clustering(metaPoints)
+    console.log(farIndex)
+
+    for(let i=0; i<farIndex.length; i++){
+        metaDataJson.splice(farIndex[i], 1);
+    };
+
+
+    localStorage.setItem("clusterMetaData", JSON.stringify(metaDataJson));
+
+    console.log("clusted")
+    console.log(metaDataJson)
+
+
     var points = [];
     for(let i=0; i<metaDataJson.length; i++){  
         point = new kakao.maps.LatLng(metaDataJson[i]["latitude"], metaDataJson[i]["longitude"])

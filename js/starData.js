@@ -1,7 +1,7 @@
 
 WIDTH = 250;
 HEIGHT = 250;
-CLUSTER_RATE= 10;
+CLUSTER_RATE= 2.5;
 
 const drawStar = (points) =>{
     var paper = Raphael(document.getElementById("container"),WIDTH,HEIGHT);
@@ -49,8 +49,8 @@ function changeY(y, minLat, maxLat) {
 // }
 
 
-const changeToXY = () => {
-    const metaData = localStorage.getItem("getMetaData");
+const changeToXY = (getMetaData) => {
+    const metaData = localStorage.getItem(getMetaData);
     const metaDataJson = JSON.parse(metaData);
 
     const points = []
@@ -84,21 +84,23 @@ const changeToXY = () => {
         points.push([X,HEIGHT-Y])
     };
 
-    points.sort(function(){
-        return Math.random() - Math.random();
-    });
+    
 
     return points;
 }
 
 window.onload = () =>{
-    const metaData = localStorage.getItem("getMetaData");
-    // const dateStart = localStorage.getItem("dateStart");
     
-    const points = changeToXY()
+    const points = changeToXY("clusterMetaData")
+
+    points.sort(function(){
+        return Math.random() - Math.random();
+    });
 
     drawStar(points)
 }
+
+
 
 const getCentroid = (points) => {
     sumX = 0;
@@ -116,43 +118,47 @@ const getDistance = (points) => {
     
     let pointsDis=[];
     for(let i=0; i<points.length; i++){
-        const distance =  Math.sqrt( (centroid[0]-points[i][0])^2 + (centroid[1]-points[i][1])^2 );
+        const distance =  Math.sqrt( (centroid[0]-points[i][0])**2 + (centroid[1]-points[i][1])**2 );
         pointsDis.push(distance)
     };
     return pointsDis;
 }
 
-const clustering = (points, centroid) => {
-    let clusterPoints=[];
+const clustering = (points) => { 
     
-    
-    
-    
+    let farIndex = [];
 
-    let startLen = pointsDis.length;
-    let endLen = 0; 
-    while( startLen != endLen){
-
-    }
-    // 해당 points들의 무게중심까지 거리 최대 최소
     let pointsDis = getDistance(points);
-    
-    let disMin = pointsDis[0];
-    let disMax = pointsDis[0];
-    for(let i=0; i<pointsDis.length; i++){
-        if(pointsDis[i] > disMax){
-            disMax = pointsDis[i];
-        }
-        else if(pointsDis[i] < disMin){
-            disMin = pointsDis[i]
-        }
-    }
+    let startLen = points.length;
+    let endLen = 0; 
+    while( startLen != endLen ){
+        startLen = points.length;
 
-    if(disMax/disMin > CLUSTER_RATE){
-        let maxIndex = pointsDis.indexOf(disMax)
-        pointsDis.splice(maxIndex, 1)
+        //pointsDis 에서 최대 최소 찾기
+        pointsDis = getDistance(points);
+        let disMin = pointsDis[0];
+        let disMax = pointsDis[0];
+        for(let i=0; i<pointsDis.length; i++){
+            if(pointsDis[i] > disMax){
+                disMax = pointsDis[i];
+            }
+            else if(pointsDis[i] < disMin){
+                disMin = pointsDis[i]
+            }
+        }
+    
+        //튀는 값 points에서 제거, index 푸시
+        if(disMax/disMin > CLUSTER_RATE){
+            let maxIndex = pointsDis.indexOf(disMax)
+            farIndex.push(maxIndex)
+            points.splice(maxIndex, 1)
+        }
+
+        endLen = points.length;
+
     }
     
+    return farIndex;
 
 
 }
