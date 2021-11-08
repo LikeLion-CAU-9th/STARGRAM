@@ -14,7 +14,8 @@ function getBase64Image(img) {
 const metaPush = (metaData, fileInfo) => {
   for (let i = 0; i < fileInfo.length; i++) {
     EXIF.getData(fileInfo[i], () => {
-      const tags = EXIF.getAllTags(fileInfo[i]);
+      let tags = EXIF.getAllTags(fileInfo[i]);
+      tags["fileName"] = fileInfo[i].name;
       console.log(tags);
       metaData.push(tags);
     });
@@ -70,7 +71,7 @@ const dataProcess = (metaData) => {
   return new Promise((resolve, reject) => {
     console.log(`DataProcess: ${metaData}`);
 
-    const fileInfo = document.querySelector("#uploadImg").files;
+    
     const getMetaData = [];
     for (let i = 0; i < metaData.length; i++) {
       const exifLat = metaData[i]["GPSLatitude"];
@@ -78,7 +79,7 @@ const dataProcess = (metaData) => {
       const exifLatRef = metaData[i]["GPSLatitudeRef"];
       const exifLongRef = metaData[i]["GPSLongitudeRef"];
       const dateTime = metaData[i]["DateTime"];
-      const fileName = fileInfo[i].name;
+      const fileName = metaData[i]["fileName"];
 
       if (exifLat == undefined) {
         getMetaData.push({
@@ -146,27 +147,37 @@ const afterWriting = () => {
     console.log(`afterWriting`);
     let needToPing = 0;
     const photoList = JSON.parse(localStorage.getItem("getMetaData"));
-    const clusterList = JSON.parse(localStorage.getItem("clusterMetaData"));
+    // const clusterList = JSON.parse(localStorage.getItem("clusterMetaData"));
+
 
     for (let i = 0; i < photoList.length; i++) {
       if (photoList[i]["latitude"] === "NO_WHERE") {
         needToPing += 1;
       }
     }
+
     if (needToPing === 0) {
       const btn = document.querySelector(".start-btn button");
       btn.innerHTML = "별자리 그리기";
       btn.style.backgroundColor = "#d0e78b";
-      if(photoList.length == clusterList.length){
-        btn.addEventListener("click", (e) => {
-          location.href = "./template/mapUpload.html";
-        });
-      }
-      else{
-        btn.addEventListener("click", (e) => {
-          location.href = "./template/beforeCluster.html";
-        });
-      }
+      
+      btn.addEventListener("click", (e) => {
+        location.href = "./template/beforeCluster.html";
+      });
+
+      //걸러낼 데이터 있을때 없을때 구분
+      // if(photoList.length == clusterList.length){
+      //   btn.addEventListener("click", (e) => {
+      //     location.href = "./template/mapUpload.html";
+      //   });
+      // }
+      // else{
+      //   btn.addEventListener("click", (e) => {
+      //     location.href = "./template/beforeCluster.html";
+      //   });
+      // }
+      //
+      
 
     } else {
       const introText = document.querySelector(".intro-text p");
