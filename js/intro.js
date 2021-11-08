@@ -12,15 +12,19 @@ function getBase64Image(img) {
 }
 
 const writeDate = (len) => {
-  const imgFile = document.querySelectorAll(".uploadImg");
-  for (let i = 0; i < len; i++) {
-    let img64 = getBase64Image(imgFile[i]);
-    let imgObj = { photo_name: imgFile[i].title, base64: img64 };
-    writeIndexedDB(imgObj);
-  }
-  const getMetaData = document.getElementById("metadata").innerHTML;
-  localStorage.removeItem("getMetaData");
-  localStorage.setItem("getMetaData", getMetaData);
+  return new Promise((resolve, reject) => {
+    initIndexedDB();
+    const imgFile = document.querySelectorAll(".uploadImg");
+    for (let i = 0; i < len; i++) {
+      let img64 = getBase64Image(imgFile[i]);
+      let imgObj = { photo_name: imgFile[i].title, base64: img64 };
+      writeIndexedDB(imgObj);
+    }
+    const getMetaData = document.getElementById("metadata").innerHTML;
+    localStorage.removeItem("getMetaData");
+    localStorage.setItem("getMetaData", getMetaData);
+    resolve();
+  });
 };
 
 const afterWriting = () => {
@@ -136,7 +140,6 @@ const uploadImgPreview = () => {
 
     const getMetaDataJson = JSON.stringify(getMetaData);
     document.getElementById("metadata").innerHTML = getMetaDataJson;
-    writeDate(fileInfo.length);
-    afterWriting();
+    writeDate(fileInfo.length).then(afterWriting());
   }, 100);
 };
