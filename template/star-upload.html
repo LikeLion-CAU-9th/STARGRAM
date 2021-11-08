@@ -39,9 +39,23 @@
       <button id="starDownload" data-html2canvas-ignore="true">별자리 저장</button>
       <!--캡쳐 영역-->
       <div id="container" class="container"></div> 
-      
-    </section>
+      <br>
+      <br>
+      <!--kakao url 공유 버튼-->
+      <a id="create-kakao-link-btn">
+        <img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"
+        />
+      </a>
+
+      <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+      <script>
+          Kakao.init('fdda4624da1254167ef11755a1d9d7a3');
+          Kakao.isInitialized();
+      </script>
+      <script src="../js/kakaoShare.js"></script>
     
+
+    </section>
 
   </body>
 </html>
