@@ -11,28 +11,22 @@ function getBase64Image(img) {
   return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
 }
 
-const metaPush = (fileInfo) => {
-  return new Promise((resolve, reject) => {
-    let metaData = [];
-    let leng = fileInfo.length;
-    for (let i = 0; i < leng; i++) {
-      EXIF.getData(fileInfo[i], () => {
-        const tags = EXIF.getAllTags(fileInfo[i]);
-        console.log(tags);
-        metaData.push(tags);
-      });
-    }
-    setTimeout(() => {
-      resolve(metaData);
-    }, 400);
-  });
+const metaPush = (metaData, fileInfo) => {
+  for (let i = 0; i < fileInfo.length; i++) {
+    EXIF.getData(fileInfo[i], () => {
+      const tags = EXIF.getAllTags(fileInfo[i]);
+      console.log(tags);
+      metaData.push(tags);
+    });
+  }
 };
 
 const uploadImgPreview = () => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     console.log("Upload Img Preview");
     // 업로드 파일 읽기
     const fileInfo = document.querySelector("#uploadImg").files;
+    let metaData = [];
     let reader = [];
     for (let i = 0; i < fileInfo.length; i++) {
       reader.push(new FileReader());
@@ -43,23 +37,18 @@ const uploadImgPreview = () => {
       img.className = "uploadImg";
       if (i === fileInfo.length - 1) {
         reader[i].onload = function (e) {
-          let metaData = [];
-          let leng = fileInfo.length;
-          for (let i = 0; i < leng; i++) {
-            EXIF.getData(fileInfo[i], () => {
-              const tags = EXIF.getAllTags(fileInfo[i]);
-              console.log(tags);
-              metaData.push(tags);
-            });
-          }
           img.src = e.target.result;
-          setTimeout(() => {
-            console.log(
-              `uploadImgPreview resolve and meta lengh: ${metaData.length}`
-            );
-            resolve(metaData);
-          }, 1000);
+          metaPush(metaData, fileInfo);
         };
+        console.log(
+          `uploadImgPreview resolve and meta lengh: ${metaData.length}`
+        );
+        const resInterv = setInterval(() => {
+          if (metaData.length === fileInfo.length) {
+            clearInterval(resInterv);
+            resolve(metaData);
+          }
+        }, 100);
       } else {
         reader[i].onload = function (e) {
           img.src = e.target.result;
