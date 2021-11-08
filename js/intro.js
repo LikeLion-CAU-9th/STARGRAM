@@ -146,6 +146,8 @@ const afterWriting = () => {
     console.log(`afterWriting`);
     let needToPing = 0;
     const photoList = JSON.parse(localStorage.getItem("getMetaData"));
+    const clusterList = JSON.parse(localStorage.getItem("clusterMetaData"));
+
     for (let i = 0; i < photoList.length; i++) {
       if (photoList[i]["latitude"] === "NO_WHERE") {
         needToPing += 1;
@@ -155,9 +157,17 @@ const afterWriting = () => {
       const btn = document.querySelector(".start-btn button");
       btn.innerHTML = "별자리 그리기";
       btn.style.backgroundColor = "#d0e78b";
-      btn.addEventListener("click", (e) => {
-        location.href = "./template/mapUpload.html";
-      });
+      if(photoList.length == clusterList.length){
+        btn.addEventListener("click", (e) => {
+          location.href = "./template/mapUpload.html";
+        });
+      }
+      else{
+        btn.addEventListener("click", (e) => {
+          location.href = "./template/beforeCluster.html";
+        });
+      }
+
     } else {
       const introText = document.querySelector(".intro-text p");
       introText.innerHTML =
