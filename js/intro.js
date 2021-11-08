@@ -69,6 +69,8 @@ const uploadImgPreview = () => {
 const dataProcess = (metaData) => {
   return new Promise((resolve, reject) => {
     console.log(`DataProcess: ${metaData}`);
+
+    const fileInfo = document.querySelector("#uploadImg").files;
     const getMetaData = [];
     for (let i = 0; i < metaData.length; i++) {
       const exifLat = metaData[i]["GPSLatitude"];
@@ -76,9 +78,11 @@ const dataProcess = (metaData) => {
       const exifLatRef = metaData[i]["GPSLatitudeRef"];
       const exifLongRef = metaData[i]["GPSLongitudeRef"];
       const dateTime = metaData[i]["DateTime"];
+      const fileName = fileInfo[i].name;
 
       if (exifLat == undefined) {
         getMetaData.push({
+          fileName: fileName,
           latitude: "NO_WHERE",
           longitude: "NO_WHERE",
           dateTime: dateTime,
@@ -101,6 +105,7 @@ const dataProcess = (metaData) => {
         const wtmX = latitude;
         const wtmY = longitude;
         getMetaData.push({
+          fileName: fileName,
           latitude: wtmX,
           longitude: wtmY,
           dateTime: dateTime,
