@@ -2,7 +2,19 @@ const pinned_main = () => {
   if (!needToPin()) {
     location.href = "./beforeCluster.html";
   }
+  const meta = JSON.parse(localStorage.getItem("getMetaData"));
+  let fileName = "";
+  for (let i = 0; i < meta.length; i++) {
+    const img = meta[i];
+    if (img["latitude"] === "NO_WHERE" || img["longitude"] === "NO_WHERE") {
+      fileName = img["fileName"];
+      break;
+    }
+  }
 
+  const imgTag = document.querySelector("#targetImg");
+  imgTag.style.display = "inline-block";
+  //   imgTag.src =
   let mapCenter = center();
   console.log(mapCenter);
   var mapContainer = document.getElementById("map"), // 지도를 표시할 div
