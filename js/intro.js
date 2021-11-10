@@ -71,7 +71,6 @@ const dataProcess = (metaData) => {
   return new Promise((resolve, reject) => {
     console.log(`DataProcess: ${metaData}`);
 
-    
     const getMetaData = [];
     for (let i = 0; i < metaData.length; i++) {
       const exifLat = metaData[i]["GPSLatitude"];
@@ -145,22 +144,21 @@ const saveDate = (leng) => {
 const afterWriting = () => {
   return new Promise((resolve, reject) => {
     console.log(`afterWriting`);
-    let needToPing = 0;
+    let needToPin = 0;
     const photoList = JSON.parse(localStorage.getItem("getMetaData"));
     // const clusterList = JSON.parse(localStorage.getItem("clusterMetaData"));
 
-
     for (let i = 0; i < photoList.length; i++) {
       if (photoList[i]["latitude"] === "NO_WHERE") {
-        needToPing += 1;
+        needToPin += 1;
       }
     }
 
-    if (needToPing === 0) {
+    if (needToPin === 0) {
       const btn = document.querySelector(".start-btn button");
       btn.innerHTML = "별자리 그리기";
       btn.style.backgroundColor = "#d0e78b";
-      
+
       btn.addEventListener("click", (e) => {
         location.href = "./template/beforeCluster.html";
       });
@@ -177,12 +175,10 @@ const afterWriting = () => {
       //   });
       // }
       //
-      
-
     } else {
       const introText = document.querySelector(".intro-text p");
       introText.innerHTML =
-        `위치정보를 불러올 수 없는 사진이 ${needToPing}장 있어요.<br>` +
+        `위치정보를 불러올 수 없는 사진이 ${needToPin}장 있어요.<br>` +
         "사진을 촬영한 장소를 직접 지정해주세요!";
       introText.style.color = "#d75a5a";
       const btn = document.querySelector(".start-btn button");
