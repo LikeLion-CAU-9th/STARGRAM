@@ -18,42 +18,73 @@
     <script src="../js/starData.js"></script>
     <script src="../js/starDownload.js"></script>
     <script>
-      function copyText() {
-          var copyText = document.getElementById("myText");
-          copyText.select();
+      //링크 복사
+      function copyToClipboard() {
+          const t = document.createElement("textarea");
+          document.body.appendChild(t);
+          t.value = "www.stargram.site";
+          t.select();
           document.execCommand('copy');
-          alert("복사된 문자열: " + copyText.value);
-        }      
+          document.body.removeChild(t);
+          alert("링크 복사 완료!")
+      }
+      
     </script>
-
   </head>
+  
   <body>
     <section class="rendering-container">
       <nav>
         <span class="nav-title">STARGRAM</span>
       </nav>
       
-      <input type="text" value="www.stargram.site" id="myText">
-      <button onclick="copyText()">url 복사</button>
-
-      <button id="starDownload" data-html2canvas-ignore="true">별자리 저장</button>
+      
       <!--캡쳐 영역-->
       <div id="container" class="container"></div> 
-      <br>
-      <br>
-      <!--kakao url 공유 버튼-->
-      <a id="create-kakao-link-btn">
-        <img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"
-        />
-      </a>
+      
+      <!-- 내용 받는 디브 -->
+      <div id="records">
+        <p>별자리 제목 : <input type="text" name="title" id="title"></p>
+        <p>여행 날짜 : <input type="date" name="date_start" id="date_start"><input type="date" name="date_end" id="date_end"></p>
+        <p>여행지 : <input type="text" name="place" id="place"></p>
+        <p>한줄 소감 : <input type="text" name="impression" id="impression"></p>
+        <br>
+        <button onclick="writeData()">완료</button>
+      </div>
 
+      <!-- 완료 버튼 누르면 나옴 -->
+      <div id="hidden_records" style="display:none;">
+      
+        <div id="title_real"></div>
+        <hr>
+        <div><span id="date_start_real"></span> ~ <span id="date_end_real"></span></div>
+        <div id="place_real"></div>
+        <div id ="impression_real"></div>
+        
+        <!--kakao url 공유 버튼-->
+        <a id="create-kakao-link-btn">
+          <img style="width:30px; height:30px;" src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"
+          />
+        </a>
+        <button onclick="copyToClipboard()">url 복사</button>
+        <button id="starDownload" data-html2canvas-ignore="true">별자리 저장</button>
+      </div>
+        
+
+
+      <br>
+      <br>
+      
+
+      <!--카톡 공유 -->
       <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
       <script>
           Kakao.init('fdda4624da1254167ef11755a1d9d7a3');
           Kakao.isInitialized();
       </script>
       <script src="../js/kakaoShare.js"></script>
-    
+      
+
 
     </section>
 
