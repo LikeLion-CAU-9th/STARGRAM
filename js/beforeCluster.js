@@ -12,6 +12,33 @@ const beforeCluster = () => {
     let metaDataJson = JSON.parse(metaData);
 
 
+    //메타 데이터 먼저 포인트로 바꾸기
+    let metaPoints = changeToXY("getMetaData")
+    //튀는 값 인덱스 찾기
+    let farIndex = clustering(metaPoints)
+    console.log(farIndex)
+
+    //튀는 값 제거
+    for(let i=0; i<farIndex.length; i++){
+        metaDataJson.splice(farIndex[i], 1);
+    };
+
+
+    localStorage.setItem("clusterMetaData", JSON.stringify(metaDataJson));
+
+    console.log("clusted")
+    console.log(metaDataJson)
+
+    
+    //튀는 값 없는 일반적인 경우
+    if(farIndex.length==0){
+        console.log("들어왔니?")
+        location.href = "./mapUpload.html"
+    }
+
+    metaData = localStorage.getItem("getMetaData");
+    metaDataJson = JSON.parse(metaData);
+
     var points = [];
     for(let i=0; i<metaDataJson.length; i++){  
         point = new kakao.maps.LatLng(metaDataJson[i]["latitude"], metaDataJson[i]["longitude"])
