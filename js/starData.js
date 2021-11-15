@@ -19,14 +19,14 @@ const drawStar = (points) =>{
     
     paper.path(path.join(','))
         .attr({
-        "stroke" : "red",
+        "stroke" : "white",
         'stroke-width': 1,
         // 'stroke-linejoin': 'round'
     });
 
     paper.path(subPath)
         .attr({
-        "stroke" : "red",
+        "stroke" : "white",
         'stroke-width': 1,
         // 'stroke-linejoin': 'round'
     });    
@@ -160,5 +160,34 @@ const clustering = (points) => {
     
     return farIndex;
 
+
+}
+
+
+
+// 나머지 데이터 저장하고 히든태그에 정보 넣어서 보여주기
+const writeData = () => {
+    
+    const title = document.getElementById("title");
+    const dateStart = document.getElementById("date_start");
+    const dateEnd = document.getElementById("date_end");
+    const place = document.getElementById("place");
+    const impression = document.getElementById("impression");
+
+    let records = {"title": title.value, "dateStart":dateStart.value, "dateEnd":dateEnd.value, "place": place.value, "impression":impression.value} 
+    localStorage.setItem("records", records)
+    
+    document.getElementById("title_real").innerHTML = title.value;
+    document.getElementById("date_start_real").innerHTML = dateStart.value;
+    document.getElementById("date_end_real").innerHTML = dateEnd.value;
+    document.getElementById("place_real").innerHTML = place.value;
+    document.getElementById("impression_real").innerHTML = impression.value;
+
+    const recordsDiv = document.getElementById("records")
+    recordsDiv.style.display = "none";
+
+    const hiddenRecordsDiv = document.getElementById("hidden_records")
+    hiddenRecordsDiv.style.display = "block";
+    
 
 }
