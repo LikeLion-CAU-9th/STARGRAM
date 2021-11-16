@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap");
+
 html,
 body {
   margin: 0;
@@ -18,16 +20,17 @@ nav {
 
 .nav-title {
   font-size: 26px;
-  letter-spacing: 3px;
+  letter-spacing: 5px;
+  font-family: "Playfair Display", serif;
 }
 
-.container{
-  border:1px solid white;
-  text-align:center;
+.container {
+  border: 1px solid white;
+  text-align: center;
   vertical-align: middle;
   padding: 20px;
-  margin-top: 20px; 
-  width:300px;
+  margin-top: 20px;
+  width: 300px;
   height: 300px;
-  display:inline-block;
+  display: inline-block;
 }
