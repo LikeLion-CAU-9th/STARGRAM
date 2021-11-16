@@ -1,11 +1,16 @@
 .records-line {
   text-align: right;
   margin: 2px 0 2px 0;
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 .records-line #title {
   height: 30px;
   margin-bottom: 12px;
+  /* font-family: "Noto Sans KR", sans-serif; */
+  font-family: "Yellowtail", cursive !important;
+  letter-spacing: 4px;
+  font-size: 20px;
 }
 
 .records-line-left {
@@ -19,7 +24,9 @@
 }
 
 .record-date {
-  width: 40% !important;
+  width: 43% !important;
+  font-size: 12px;
+  text-align: right;
 }
 
 .container {
