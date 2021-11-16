@@ -7,3 +7,38 @@
   height: 140px;
   z-index: 10;
 }
+
+#map {
+  width: 100vw;
+  height: 78vh;
+}
+
+.discription {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: inline-block;
+  width: 100vw;
+  height: 10vh;
+  text-align: center;
+  font-size: 17px;
+  line-height: 10vh;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  color: #ffffff;
+  animation: fade-in-out 1s ease-in-out infinite;
+}
+
+@keyframes fade-in-out {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
