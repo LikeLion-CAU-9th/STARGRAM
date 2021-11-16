@@ -1,0 +1,64 @@
+.records-line {
+  text-align: right;
+  margin: 2px 0 2px 0;
+}
+
+.records-line #title {
+  height: 30px;
+  margin-bottom: 12px;
+}
+
+.records-line-left {
+  float: left;
+  max-width: 100px;
+}
+
+.records-line-right {
+  display: inline-block;
+  width: calc(80vw - 100px);
+}
+
+.record-date {
+  width: 40% !important;
+}
+
+.container {
+  display: inline-block;
+  width: 80vw;
+  height: 80vw;
+  margin: 10px 0 18px 0;
+  border: 2px solid #3b7fcc;
+  box-shadow: 1px 2px 4px #78a2d1;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+#records {
+  display: grid;
+  width: 80vw;
+  margin: 0 0 10px 10vw;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+#records input {
+  display: inline-block;
+  width: 98%;
+  height: 20px;
+  color: #efefef;
+  background: transparent;
+  text-align: center;
+  border: none;
+  border-bottom: 1px solid #efefefd1;
+}
+
+.complete-btn {
+  background-color: #d69cdc;
+  border: none;
+  width: 50px;
+  height: 30px;
+  line-height: 30px;
+  font-weight: bold;
+  border-radius: 6px;
+  float: right;
+  margin-right: 10vw;
+}
