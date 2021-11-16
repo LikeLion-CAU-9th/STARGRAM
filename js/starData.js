@@ -7,12 +7,21 @@ const drawStar = (points) =>{
     var paper = Raphael(document.getElementById("container"),WIDTH,HEIGHT);
     //x축 y축에서 50px 떨어진 곳에 가로 세로 1000px인 영역
     
-    const path = [];
+    var path = [];
+    var myCircle=[];
     for(var i = 0; i < points.length; i ++) {
+        // 길만들기
         path.push(i == 0 ? 'M' : 'L');
         path.push(points[i][0]);
         path.push(points[i][1]);
+
+        // 별 만들기
+        myCircle[i] = paper.circle(points[i][0],points[i][1],Math.floor(Math.random()*3)+1).attr('stroke','#FFF');
+        myCircle[i].glow().attr('stroke','#FFF');
+        myCircle[i].attr({fill:"white"});
     }
+
+   
 
     const subPath = `M,${points[1][0]},${points[1][1]},L,${points[3][0]},${points[3][1]}`
 
@@ -20,16 +29,21 @@ const drawStar = (points) =>{
     paper.path(path.join(','))
         .attr({
         "stroke" : "white",
-        'stroke-width': 1,
+        'stroke-width': 0.7,
         // 'stroke-linejoin': 'round'
     });
 
     paper.path(subPath)
         .attr({
         "stroke" : "white",
-        'stroke-width': 1,
+        'stroke-width': 0.7,
         // 'stroke-linejoin': 'round'
-    });    
+    }); 
+
+    
+    
+
+
 
 };
 
@@ -78,8 +92,20 @@ const changeToXY = (getMetaData) => {
     console.log(minMaxInfo)
 
     for(let i=0; i<metaDataJson.length; i++){
-        const X = changeX(metaDataJson[i]["longitude"], minMaxInfo.minLon, minMaxInfo.maxLon)
-        const Y = changeY(metaDataJson[i]["latitude"], minMaxInfo.minLat, minMaxInfo.maxLat)
+        let X = changeX(metaDataJson[i]["longitude"], minMaxInfo.minLon, minMaxInfo.maxLon)
+        if(X == 0){
+            X +=10;
+        }
+        else if(X == WIDTH){
+            X -=10;
+        };
+        let Y = changeY(metaDataJson[i]["latitude"], minMaxInfo.minLat, minMaxInfo.maxLat)
+        if(Y == 0){
+            Y +=10;
+        }
+        else if(Y == HEIGHT){
+            Y -=10;
+        };
         
         points.push([X,HEIGHT-Y])
     };
