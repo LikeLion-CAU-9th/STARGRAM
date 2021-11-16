@@ -122,20 +122,28 @@ const dataProcess = (metaData) => {
 
 // Timeout 10000
 
-const saveDate = (leng) => {
+const saveData = (leng) => {
   return new Promise((resolve, reject) => {
     console.log(`saveData: ${leng}`);
     initIndexedDB();
     const imgFile = document.querySelectorAll(".uploadImg");
+    let writtenData = 0;
     for (let i = 0; i < leng; i++) {
       let img64 = getBase64Image(imgFile[i]);
       let imgObj = { photo_name: imgFile[i].title, base64: img64 };
-      writeIndexedDB(imgObj);
+      writeIndexedDB(imgObj).then(() => {
+        writtenData += 1;
+      });
     }
     const getMetaData = document.getElementById("metadata").innerHTML;
     localStorage.removeItem("getMetaData");
     localStorage.setItem("getMetaData", getMetaData);
-    resolve();
+    let interv = setInterval(() => {
+      if (writtenData === leng) {
+        clearInterval(interv);
+        resolve();
+      }
+    }, 100);
   });
 };
 
@@ -195,6 +203,6 @@ const afterWriting = () => {
 const introAsyncFlow = async () => {
   let metaData = await uploadImgPreview();
   let metaLength = await dataProcess(metaData);
-  await saveDate(metaLength);
+  await saveData(metaLength);
   await afterWriting();
 };

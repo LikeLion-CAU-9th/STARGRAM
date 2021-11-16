@@ -3,28 +3,31 @@ if (!window.indexedDB) {
 }
 
 const writeIndexedDB = (base64ImageObj) => {
-  let request = window.indexedDB.open("stargramDB");
-  request.onerror = function (e) {
-    alert("Database Error: ", e.target.errorCode);
-  };
-  request.onsuccess = function (e) {
-    let db = this.result;
-    let transaction = db.transaction(["image"], "readwrite");
-
-    transaction.oncomplete = function (e) {
-      console.log("done");
+  return new Promise((resolve) => {
+    let request = window.indexedDB.open("stargramDB");
+    request.onerror = function (e) {
+      alert("Database Error: ", e.target.errorCode);
     };
+    request.onsuccess = function (e) {
+      let db = this.result;
+      let transaction = db.transaction(["image"], "readwrite");
 
-    transaction.onerror = function (e) {
-      console.log("fail");
-    };
+      transaction.oncomplete = function (e) {
+        console.log("done");
+      };
 
-    let objectStore = transaction.objectStore("image");
-    let request_write = objectStore.add(base64ImageObj);
-    request_write.onsuccess = function (e) {
-      console.log(e.target.result);
+      transaction.onerror = function (e) {
+        console.log("fail");
+      };
+
+      let objectStore = transaction.objectStore("image");
+      let request_write = objectStore.add(base64ImageObj);
+      request_write.onsuccess = function (e) {
+        console.log(e.target.result);
+        resolve();
+      };
     };
-  };
+  });
 };
 
 const clearIndexedDB = () => {
