@@ -2,6 +2,8 @@ const pinned_main = () => {
   if (!needToPin()) {
     location.href = "./beforeCluster.html";
   }
+
+  // Image data read and rendering
   const meta = JSON.parse(localStorage.getItem("getMetaData"));
   let fileName = "";
   for (let i = 0; i < meta.length; i++) {
@@ -12,9 +14,15 @@ const pinned_main = () => {
     }
   }
 
+  document.querySelector("#map").innerHTML +=
+    document.querySelector("#map").innerHTML + '<img id="targetImg" />';
   const imgTag = document.querySelector("#targetImg");
   imgTag.style.display = "inline-block";
-  //   imgTag.src =
+  readIndexedDB(fileName).then((result) => {
+    imgTag.setAttribute("src", "data:image/png;base64," + result);
+  });
+
+  // Kakao map arrangement
   let mapCenter = center();
   console.log(mapCenter);
   var mapContainer = document.getElementById("map"), // 지도를 표시할 div
@@ -45,11 +53,24 @@ const pinned_main = () => {
     // 마커 위치를 클릭한 위치로 옮깁니다
     marker.setPosition(latlng);
 
-    var message = "클릭한 위치의 위도는 " + latlng.getLat() + " 이고, ";
-    message += "경도는 " + latlng.getLng() + " 입니다";
+    let pinnedLat = latlng.getLat();
+    let pinnedLong = latlng.getLng();
 
-    var resultDiv = document.getElementById("clickLatlng");
-    resultDiv.innerHTML = message;
+    setTimeout(() => {
+      if (confirm("선택하신 위치를 사진의 촬영지로 사용하시겠습니까?")) {
+        const metaList = JSON.parse(localStorage.getItem("getMetaData"));
+        let newList = [];
+        for (let i = 0; i < meta.length; i++) {
+          if (metaList[i].fileName === fileName) {
+            metaList[i].latitude = pinnedLat;
+            metaList[i].longitude = pinnedLong;
+          }
+          newList.push(metaList[i]);
+        }
+        localStorage.setItem("getMetaData", JSON.stringify(newList));
+        location.reload();
+      }
+    }, 100);
   });
 };
 
