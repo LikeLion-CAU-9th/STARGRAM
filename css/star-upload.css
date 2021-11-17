@@ -71,13 +71,13 @@
 }
 
 .title-real{
-  margin:20px;
+  margin:15px;
   font-family: "Yellowtail", cursive !important;
-  font-size: 30px;
+  font-size: 25px;
 }
 
 .date-real{
-  margin:50px 0px 10px 0px;
+  margin:30px 0px 10px 0px;
 }
 
 .place-real{
@@ -87,7 +87,7 @@
 
 .impression-real{
   display: inline-block;
-  margin:10px 0px 30px 0px;
+  margin:0px 0px 20px 0px;
   padding:20px;
   width: 60vw;
   font-weight:1000;
