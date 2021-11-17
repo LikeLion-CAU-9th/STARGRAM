@@ -34,7 +34,7 @@
   width: 80vw;
   height: 80vw;
   margin: 10px 0 18px 0;
-  border: 2px solid #3b7fcc;
+  border: 2px solid;
   box-shadow: 1px 2px 4px #78a2d1;
   border-radius: 10px;
   padding: 20px;
@@ -97,7 +97,8 @@
   font-size: 25px;
 }
 
-.share-button-group input{
+.share-button-group input ,.iconify{
+  color:#fdf7f7;
   width:30px;
   height:30px;
   background-size: 100%;
@@ -110,10 +111,8 @@
   background: url("https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png") no-repeat;
 }
 
-.link-button{
-  background: url(../image/link_icon.png) no-repeat;
-}
-
-.save-button{
-  background: url(../image/save_icon.png) no-repeat;
+.iconify{
+  offset-rotate : 90deg;
+  mask-clip : horizontal;
+  background : no-repeat;
 }
