@@ -49,3 +49,15 @@ nav {
     background-position: 200% center;
   }
 }
+
+.container {
+  border: 1px solid white;
+  text-align: center;
+  vertical-align: middle;
+  padding: 20px;
+  margin-top: 20px;
+  width: 300px;
+  height: 300px;
+  display: inline-block;
+}
+

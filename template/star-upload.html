@@ -84,32 +84,27 @@
             <input type="text" name="impression" id="impression" />
           </div>
         </div>
+        <button class="complete-btn" onclick="writeData()">완료</button>
       </div>
-      <button class="complete-btn" onclick="writeData()">완료</button>
-
+      
+      
       <!-- 완료 버튼 누르면 나옴 -->
       <div id="hidden_records" style="display: none">
-        <div id="title_real"></div>
-        <hr />
-        <div>
+        <div id="title_real" class="title-real"></div>
+        <hr style="width:80vw; color:white"/>
+        <div class="date-real">
           <span id="date_start_real"></span> ~ <span id="date_end_real"></span>
         </div>
-        <div id="place_real"></div>
-        <div id="impression_real"></div>
+        <div id="place_real" class="place-real"></div>
+        <div id="impression_real" class="impression-real"></div>
+        
+        <div class="share-button-group">
+          <!--kakao url 공유 버튼-->
+          <input type="button" id="create-kakao-link-btn" class="kakako-button">
+          <input type="button" class="link-button" onclick="copyToClipboard()" data-html2canvas-ignore="true">
+          <input type="button" id="starDownload" class="save-button" data-html2canvas-ignore="true">
+        </div>
 
-        <!--kakao url 공유 버튼-->
-        <a id="create-kakao-link-btn">
-          <img
-            style="width: 30px; height: 30px"
-            src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"
-          />
-        </a>
-        <button onclick="copyToClipboard()" data-html2canvas-ignore="true">
-          url 복사
-        </button>
-        <button id="starDownload" data-html2canvas-ignore="true">
-          별자리 저장
-        </button>
       </div>
 
       <!--카톡 공유 -->

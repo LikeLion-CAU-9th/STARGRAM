@@ -207,7 +207,7 @@ const writeData = () => {
     document.getElementById("date_start_real").innerHTML = dateStart.value;
     document.getElementById("date_end_real").innerHTML = dateEnd.value;
     document.getElementById("place_real").innerHTML = place.value;
-    document.getElementById("impression_real").innerHTML = impression.value;
+    document.getElementById("impression_real").innerHTML = `<span>"  </span>${impression.value}<span>  "</span>`;
 
     const recordsDiv = document.getElementById("records")
     recordsDiv.style.display = "none";
