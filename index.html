@@ -16,12 +16,13 @@
       type="text/javascript"
       src="https://cdn.jsdelivr.net/npm/exif-js"
     ></script>
+    <script src="./js/dbDAO.js"></script>
     <script src="./js/intro.js"></script>
     <title>Stargram</title>
   </head>
   <body>
     <section class="rendering-container">
-      <nav>
+      <nav style="background-color: black;">
         <span class="nav-title">STARGRAM</span>
       </nav>
       <div class="starfall-screen">
@@ -31,7 +32,7 @@
           <p>
             올 한 해 행복이 가장 묻어난 여행을 떠올려보세요.<br />
             특별한 추억이 담긴 사진을 한데 모아<br />
-            별자리로 만들어 드려요!🔔<br />
+            별자리로 만들어 드려요! 🔔<br />
             
           </p>
           <div class="start-btn">
@@ -42,12 +43,12 @@
                 type="file"
                 multiple
                 id="uploadFile"
-                onChange="uploadImgPreview();"
+                onChange="introAsyncFlow();"
                 accept="image/*"
               />
             </button>
           </div>
-          <br>
+          <br />
           <span class="counter-text">
           지금까지
           <span id="visits"></span> 

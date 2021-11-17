@@ -31,7 +31,9 @@
   top: 46%;
   transform: translate(0, -50%);
   text-align: center;
-  font-family: "IM_Hyemin-Bold";
+  word-break: keep-all;
+  font-family: "Noto Sans KR", sans-serif;
+  color : rgb(253, 247, 247);
 }
 
 .intro-text .intro-title {
@@ -39,17 +41,21 @@
 }
 
 .intro-subtitle {
-  font-size: 12px;
-  color : gray;
-  margin-top : 10px;
+  font-size: 10.5px;
+  color : rgb(151, 151, 151);
+  margin-top : 0.5px;
 }
 
 .intro-text p {
-  font-size: 18px;
+  font-size: 16px;
   line-height: 30px;
 }
 
 #visits {
   font-weight: bolder;
-  color : #d69cdc;
+  font-size : 17.5px;
+}
+
+.uploadImg {
+  display: none;
 }

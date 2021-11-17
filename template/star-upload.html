@@ -6,42 +6,114 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/responsive.css" />
     <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/star-upload.css" />
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="../js/starUpload.js"></script>
     <!-- 화면 캡쳐 CDN -->
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/exif-js"
+    ></script>
+    <script
+      src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+
+    <script src="../js/starDownload.js"></script>
+    <script src="../js/starData.js"></script>
+    <script>
+      //링크 복사
+      function copyToClipboard() {
+        const t = document.createElement("textarea");
+        document.body.appendChild(t);
+        t.value = "www.stargram.site";
+        t.select();
+        document.execCommand("copy");
+        document.body.removeChild(t);
+        alert("링크 복사 완료!");
+      }
+    </script>
 
     <title>Star-upload</title>
-
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/exif-js"></script> 
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="../js/starData.js"></script>
-    <script src="../js/starDownload.js"></script>
-
   </head>
+
   <body>
     <section class="rendering-container">
       <nav>
         <span class="nav-title">STARGRAM</span>
       </nav>
-      
-      <button id="starDownload" data-html2canvas-ignore="true">별자리 저장</button>
-      <!--캡쳐 영역-->
-      <div id="container" class="container"></div> 
-      <br>
-      <br>
-      <!--kakao url 공유 버튼-->
-      <a id="create-kakao-link-btn">
-        <img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"
-        />
-      </a>
 
+      <!--캡쳐 영역-->
+      <div id="container" class="container"></div>
+
+      <!-- 내용 받는 디브 -->
+      <div id="records">
+        <div class="records-line">
+          <input type="text" name="title" id="title" />
+        </div>
+        <div class="records-line">
+          <div class="records-line-left">여행 날짜 :</div>
+          <div class="records-line-right">
+            <input
+              type="date"
+              name="date_start"
+              id="date_start"
+              class="record-date"
+            />
+            <span style="line-height: 20px">&nbsp;~&nbsp;</span>
+            <input
+              type="date"
+              name="date_end"
+              id="date_end"
+              class="record-date"
+            />
+          </div>
+        </div>
+        <div class="records-line">
+          <div class="records-line-left">여행지 :</div>
+          <div class="records-line-right">
+            <input type="text" name="place" id="place" />
+          </div>
+        </div>
+        <div class="records-line">
+          <div class="records-line-left">한줄 소감 :</div>
+          <div class="records-line-right">
+            <input type="text" name="impression" id="impression" />
+          </div>
+        </div>
+        <button class="complete-btn" onclick="writeData()">완료</button>
+      </div>
+      
+      
+      <!-- 완료 버튼 누르면 나옴 -->
+      <div id="hidden_records" style="display: none">
+        <div id="title_real" class="title-real"></div>
+        <hr style="width:80vw; color:white"/>
+        <div class="date-real">
+          <span id="date_start_real"></span> ~ <span id="date_end_real"></span>
+        </div>
+        <div id="place_real" class="place-real"></div>
+        <div id="impression_real" class="impression-real"></div>
+        
+        <div class="share-button-group">
+          <!--kakao url 공유 버튼-->
+          <input type="button" id="create-kakao-link-btn" class="kakako-button">
+          <input type="button" class="link-button" onclick="copyToClipboard()" data-html2canvas-ignore="true">
+          <input type="button" id="starDownload" class="save-button" data-html2canvas-ignore="true">
+        </div>
+
+      </div>
+
+      <!--카톡 공유 -->
       <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
       <script>
-          Kakao.init('fdda4624da1254167ef11755a1d9d7a3');
-          Kakao.isInitialized();
+        Kakao.init("fdda4624da1254167ef11755a1d9d7a3");
+        Kakao.isInitialized();
       </script>
       <script src="../js/kakaoShare.js"></script>
-      </section>
+    </section>
   </body>
 </html>

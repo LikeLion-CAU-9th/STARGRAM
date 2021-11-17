@@ -9,6 +9,7 @@
 
     <title>Map-upload</title>
 
+
     <script
       type="text/javascript"
       src="https://cdn.jsdelivr.net/npm/exif-js"
@@ -17,21 +18,22 @@
       type="text/javascript"
       src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=	7c9d50cde7a1ab18aa545ca41e81e846"
     ></script>
-    <script
-      type="text/javascript"
-      src="https://cdn.jsdelivr.net/npm/exif-js"
-    ></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/exif-js"></script> 
     <script src="../js/starData.js"></script>
-    <script src="../js/kakaoMap.js"></script>
+    <script src="../js/beforeCluster.js"></script>
+
   </head>
   <body>
     <section class="rendering-container">
       <nav>
         <span class="nav-title">STARGRAM</span>
       </nav>
+
       <div id="map" class="container"></div>
       <br />
-      <a href="./star-upload.html">draw</a>
+      <div>먼 위치의 사진이 있으면 별자리가 이쁘게 나오지 않아요ㅜㅜ</div>
+      <div>스타그램은 먼 위치의 사진을 자동으로 걸러주어요:)</div>
+      <a href="./mapUpload.html">멀리있는 사진 지우기</a>
     </section>
   </body>
 </html>

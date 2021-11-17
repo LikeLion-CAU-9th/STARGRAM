@@ -1,35 +1,49 @@
 
 WIDTH = 250;
 HEIGHT = 250;
-CLUSTER_RATE= 10;
+CLUSTER_RATE= 2.5;
 
 const drawStar = (points) =>{
     var paper = Raphael(document.getElementById("container"),WIDTH,HEIGHT);
     //x축 y축에서 50px 떨어진 곳에 가로 세로 1000px인 영역
     
-    const path = [];
+    var path = [];
+    var myCircle=[];
     for(var i = 0; i < points.length; i ++) {
+        // 길만들기
         path.push(i == 0 ? 'M' : 'L');
         path.push(points[i][0]);
         path.push(points[i][1]);
+
+        // 별 만들기
+        myCircle[i] = paper.circle(points[i][0],points[i][1],Math.floor(Math.random()*3)+1).attr('stroke','#FFF');
+        myCircle[i].glow().attr('stroke','#FFF');
+        myCircle[i].attr({fill:"white"});
     }
+
+   
 
     const subPath = `M,${points[1][0]},${points[1][1]},L,${points[3][0]},${points[3][1]}`
 
     
     paper.path(path.join(','))
         .attr({
-        "stroke" : "red",
-        'stroke-width': 1,
+        "stroke" : "white",
+        'stroke-width': 0.7,
         // 'stroke-linejoin': 'round'
     });
 
     paper.path(subPath)
         .attr({
-        "stroke" : "red",
-        'stroke-width': 1,
+        "stroke" : "white",
+        'stroke-width': 0.7,
         // 'stroke-linejoin': 'round'
-    });    
+    }); 
+
+    
+    
+
+
 
 };
 
@@ -49,8 +63,8 @@ function changeY(y, minLat, maxLat) {
 // }
 
 
-const changeToXY = () => {
-    const metaData = localStorage.getItem("getMetaData");
+const changeToXY = (getMetaData) => {
+    const metaData = localStorage.getItem(getMetaData);
     const metaDataJson = JSON.parse(metaData);
 
     const points = []
@@ -78,27 +92,41 @@ const changeToXY = () => {
     console.log(minMaxInfo)
 
     for(let i=0; i<metaDataJson.length; i++){
-        const X = changeX(metaDataJson[i]["longitude"], minMaxInfo.minLon, minMaxInfo.maxLon)
-        const Y = changeY(metaDataJson[i]["latitude"], minMaxInfo.minLat, minMaxInfo.maxLat)
+        let X = changeX(metaDataJson[i]["longitude"], minMaxInfo.minLon, minMaxInfo.maxLon)
+        if(X == 0){
+            X +=10;
+        }
+        else if(X == WIDTH){
+            X -=10;
+        };
+        let Y = changeY(metaDataJson[i]["latitude"], minMaxInfo.minLat, minMaxInfo.maxLat)
+        if(Y == 0){
+            Y +=10;
+        }
+        else if(Y == HEIGHT){
+            Y -=10;
+        };
         
         points.push([X,HEIGHT-Y])
     };
 
-    points.sort(function(){
-        return Math.random() - Math.random();
-    });
+    
 
     return points;
 }
 
 window.onload = () =>{
-    const metaData = localStorage.getItem("getMetaData");
-    // const dateStart = localStorage.getItem("dateStart");
     
-    const points = changeToXY()
+    const points = changeToXY("clusterMetaData")
+
+    points.sort(function(){
+        return Math.random() - Math.random();
+    });
 
     drawStar(points)
 }
+
+
 
 const getCentroid = (points) => {
     sumX = 0;
@@ -116,43 +144,76 @@ const getDistance = (points) => {
     
     let pointsDis=[];
     for(let i=0; i<points.length; i++){
-        const distance =  Math.sqrt( (centroid[0]-points[i][0])^2 + (centroid[1]-points[i][1])^2 );
+        const distance =  Math.sqrt( (centroid[0]-points[i][0])**2 + (centroid[1]-points[i][1])**2 );
         pointsDis.push(distance)
     };
     return pointsDis;
 }
 
-const clustering = (points, centroid) => {
-    let clusterPoints=[];
+const clustering = (points) => { 
     
-    
-    
-    
+    let farIndex = [];
 
-    let startLen = pointsDis.length;
-    let endLen = 0; 
-    while( startLen != endLen){
-
-    }
-    // 해당 points들의 무게중심까지 거리 최대 최소
     let pointsDis = getDistance(points);
-    
-    let disMin = pointsDis[0];
-    let disMax = pointsDis[0];
-    for(let i=0; i<pointsDis.length; i++){
-        if(pointsDis[i] > disMax){
-            disMax = pointsDis[i];
-        }
-        else if(pointsDis[i] < disMin){
-            disMin = pointsDis[i]
-        }
-    }
+    let startLen = points.length;
+    let endLen = 0; 
+    while( startLen != endLen ){
+        startLen = points.length;
 
-    if(disMax/disMin > CLUSTER_RATE){
-        let maxIndex = pointsDis.indexOf(disMax)
-        pointsDis.splice(maxIndex, 1)
+        //pointsDis 에서 최대 최소 찾기
+        pointsDis = getDistance(points);
+        let disMin = pointsDis[0];
+        let disMax = pointsDis[0];
+        for(let i=0; i<pointsDis.length; i++){
+            if(pointsDis[i] > disMax){
+                disMax = pointsDis[i];
+            }
+            else if(pointsDis[i] < disMin){
+                disMin = pointsDis[i]
+            }
+        }
+    
+        //튀는 값 points에서 제거, index 푸시
+        if(disMax/disMin > CLUSTER_RATE){
+            let maxIndex = pointsDis.indexOf(disMax)
+            farIndex.push(maxIndex)
+            points.splice(maxIndex, 1)
+        }
+
+        endLen = points.length;
+
     }
     
+    return farIndex;
 
+
+}
+
+
+
+// 나머지 데이터 저장하고 히든태그에 정보 넣어서 보여주기
+const writeData = () => {
+    
+    const title = document.getElementById("title");
+    const dateStart = document.getElementById("date_start");
+    const dateEnd = document.getElementById("date_end");
+    const place = document.getElementById("place");
+    const impression = document.getElementById("impression");
+
+    let records = {"title": title.value, "dateStart":dateStart.value, "dateEnd":dateEnd.value, "place": place.value, "impression":impression.value} 
+    localStorage.setItem("records", records)
+    
+    document.getElementById("title_real").innerHTML = title.value;
+    document.getElementById("date_start_real").innerHTML = dateStart.value;
+    document.getElementById("date_end_real").innerHTML = dateEnd.value;
+    document.getElementById("place_real").innerHTML = place.value;
+    document.getElementById("impression_real").innerHTML = `<span>"  </span>${impression.value}<span>  "</span>`;
+
+    const recordsDiv = document.getElementById("records")
+    recordsDiv.style.display = "none";
+
+    const hiddenRecordsDiv = document.getElementById("hidden_records")
+    hiddenRecordsDiv.style.display = "block";
+    
 
 }
