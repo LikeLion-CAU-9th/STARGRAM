@@ -38,7 +38,18 @@
   font-size: 28px;
 }
 
+.intro-subtitle {
+  font-size: 12px;
+  color : gray;
+  margin-top : 10px;
+}
+
 .intro-text p {
   font-size: 18px;
   line-height: 30px;
+}
+
+#visits {
+  font-weight: bolder;
+  color : #d69cdc;
 }
