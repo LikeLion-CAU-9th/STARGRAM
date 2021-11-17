@@ -33,15 +33,27 @@
   text-align: center;
   word-break: keep-all;
   font-family: "Noto Sans KR", sans-serif;
+  color : rgb(253, 247, 247);
 }
 
 .intro-text .intro-title {
   font-size: 28px;
 }
 
+.intro-subtitle {
+  font-size: 10.5px;
+  color : rgb(151, 151, 151);
+  margin-top : 0.5px;
+}
+
 .intro-text p {
   font-size: 16px;
   line-height: 30px;
+}
+
+#visits {
+  font-weight: bolder;
+  font-size : 17.5px;
 }
 
 .uploadImg {
