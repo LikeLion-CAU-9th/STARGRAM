@@ -102,6 +102,12 @@ const center = () => {
     }
   }
 
+  // 모든 데이터가 다 뻥카면
+  if(latitudeSum == 0 & longitudeSum == 0){
+    //서울 시청 기준으로 지도 불러옴
+    return {latitude: 37.566396371155086, longitude:126.97799573574606}
+  }
+
   return {
     latitude: latitudeSum / positioned,
     longitude: longitudeSum / positioned,
