@@ -3,8 +3,8 @@ Kakao.Link.createDefaultButton({
     container: '#create-kakao-link-btn',
     objectType: 'feed',
     content: {
-        title: '나만의 추억의 별자리는?',
-        description: '여행 사진으로 만드는 나만의 추억 별자리',
+        title: '나만의 행복 별자리는?',
+        description: '여행 사진으로 만드는 추억 별자리',
         imageUrl:
         '',
         link: {
