@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/responsive.css" />
     <link rel="stylesheet" href="../css/style.css" />
-
+    <link rel="stylesheet" href="../css/pinned.css" />
     <title>Map-upload</title>
 
 
@@ -26,14 +26,19 @@
   <body>
     <section class="rendering-container">
       <nav>
-        <span class="nav-title">STARGRAM</span>
+        <span class="nav-title nav-title-keyframes">STARGRAM</span>
       </nav>
 
       <div id="map" class="container"></div>
-      <br />
-      <div>먼 위치의 사진이 있으면 별자리가 예쁘게 나오지 않아요ㅜㅜ</div>
-      <div>스타그램은 먼 위치의 사진을 자동으로 걸러주어요!😉</div>
-      <a href="./mapUpload.html">멀리있는 사진 지우기</a>
+
+      
+      <div class="discription">
+        <div>먼 위치의 사진이 있으면 별자리가 이쁘게 나오지 않아요ㅜㅜ</div>
+        <div>스타그램은 먼 위치의 사진을 자동으로 걸러주어요 :)</div>
+      </div>
+      <button class = "next-btn" onclick="location.href = './mapUpload.html'">멀리 있는 사진 지우기</button>
+
+
     </section>
   </body>
 </html>

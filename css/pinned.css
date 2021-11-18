@@ -1,28 +1,31 @@
 #targetImg {
   display: none;
   position: absolute;
-  top: 0;
+  bottom: 0;
   right: 0;
   width: 140px;
-  height: 140px;
+  height: auto;
   z-index: 10;
+  border:1px solid black;
 }
 
 #map {
-  width: 100vw;
   height: 78vh;
+  margin-bottom:20px;
 }
 
 .discription {
-  position: absolute;
+  /* position: absolute;
   left: 0;
-  bottom: 0;
-  display: inline-block;
-  width: 100vw;
-  height: 10vh;
+  bottom: 0; */
+  /* display: inline-block;
+  width: 100vw; */
+  /* height: 10vh; */
+  margin-bottom : 20px;
+  height:auto;
   text-align: center;
   font-size: 17px;
-  line-height: 10vh;
+  /* line-height: 10vh; */
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 500;
   color: #ffffff;
@@ -42,3 +45,30 @@
     opacity: 1;
   }
 }
+
+/* 이후 지도 관련 css */
+.next-btn {
+  background-color: #d69cdc;
+  border: none;
+  width: auto;
+  height: 30px;
+  line-height: 30px;
+  font-weight: bold;
+  border-radius: 6px;
+}
+
+.container {
+  vertical-align: middle;
+  display: inline-block;
+  width: 80vw;
+  height: 80vw;
+  /* (480*0.8) */
+  max-width: 384px;
+  max-height: 384px;
+  margin: 10px 0 18px 0;
+  border: 1px solid white;
+  /* border: 2px solid #3b7fcc;
+  box-shadow: 1px 2px 4px #78a2d1; */
+  border-radius: 10px;
+  padding: 20px;
+}  

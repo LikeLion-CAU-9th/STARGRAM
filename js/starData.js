@@ -1,6 +1,9 @@
-
-WIDTH = 250;
-HEIGHT = 250;
+let deviceWidth = window.innerWidth;
+if (deviceWidth>480){
+    deviceWidth = 480;
+} 
+WIDTH = (deviceWidth * 0.8) - 40;
+HEIGHT = WIDTH;
 CLUSTER_RATE= 2.5;
 
 const drawStar = (points) =>{
@@ -21,11 +24,6 @@ const drawStar = (points) =>{
         myCircle[i].attr({fill:"white"});
     }
 
-   
-
-    const subPath = `M,${points[1][0]},${points[1][1]},L,${points[3][0]},${points[3][1]}`
-
-    
     paper.path(path.join(','))
         .attr({
         "stroke" : "white",
@@ -33,12 +31,17 @@ const drawStar = (points) =>{
         // 'stroke-linejoin': 'round'
     });
 
-    paper.path(subPath)
-        .attr({
-        "stroke" : "white",
-        'stroke-width': 0.7,
-        // 'stroke-linejoin': 'round'
-    }); 
+    if(points.length>3){
+        const subPath = `M,${points[1][0]},${points[1][1]},L,${points[3][0]},${points[3][1]}`    
+        paper.path(subPath)
+            .attr({
+            "stroke" : "white",
+            'stroke-width': 0.7,
+            // 'stroke-linejoin': 'round'
+        }); 
+    }
+
+    
 
     
     
