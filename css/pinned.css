@@ -1,24 +1,24 @@
 #targetImg {
   display: none;
   position: absolute;
-  top: 0;
+  bottom: 0;
   right: 0;
   width: 140px;
   height: auto;
   z-index: 10;
+  border:1px solid black;
 }
 
 #map {
-  width: 100vw;
   height: 78vh;
 }
 
 .discription {
-  position: absolute;
+  /* position: absolute;
   left: 0;
-  bottom: 0;
-  display: inline-block;
-  width: 100vw;
+  bottom: 0; */
+  /* display: inline-block;
+  width: 100vw; */
   height: 10vh;
   text-align: center;
   font-size: 17px;

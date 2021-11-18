@@ -1,4 +1,7 @@
-const deviceWidth = window.innerWidth;
+let deviceWidth = window.innerWidth;
+if (deviceWidth>480){
+    deviceWidth = 480;
+} 
 WIDTH = (deviceWidth * 0.8) - 40;
 HEIGHT = WIDTH;
 CLUSTER_RATE= 2.5;

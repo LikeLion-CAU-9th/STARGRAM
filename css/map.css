@@ -8,3 +8,19 @@
     border-radius: 6px;
     margin-top:20px;
   }
+
+.container {
+    vertical-align: middle;
+    display: inline-block;
+    width: 80vw;
+    height: 80vw;
+    /* (480*0.8) */
+    max-width: 384px;
+    max-height: 384px;
+    margin: 10px 0 18px 0;
+    border: 1px solid white;
+    /* border: 2px solid #3b7fcc;
+    box-shadow: 1px 2px 4px #78a2d1; */
+    border-radius: 10px;
+    padding: 20px;
+}  

@@ -1,3 +1,18 @@
+.container {
+  display: inline-block;
+  width: 80vw;
+  height: 80vw;
+  /* (480*0.8) */
+  max-width: 384px;
+  max-height: 384px;
+  margin: 10px 0 18px 0;
+  border: 1px solid white;
+  /* border: 2px solid #3b7fcc;
+  box-shadow: 1px 2px 4px #78a2d1; */
+  border-radius: 10px;
+  padding: 20px;
+}
+
 .records-line {
   text-align: right;
   margin: 2px 0 2px 0;
@@ -21,6 +36,7 @@
 .records-line-right {
   display: inline-block;
   width: calc(80vw - 100px);
+  max-width: 284px;
 }
 
 .record-date {
@@ -29,21 +45,14 @@
   text-align: right;
 }
 
-.container {
-  display: inline-block;
-  width: 80vw;
-  height: 80vw;
-  margin: 10px 0 18px 0;
-  border: 2px solid #3b7fcc;
-  box-shadow: 1px 2px 4px #78a2d1;
-  border-radius: 10px;
-  padding: 20px;
-}
+
 
 #records {
   display: grid;
   width: 80vw;
-  margin: 0 0 10px 10vw;
+  /* (480*0.8) */
+  max-width: 384px;
+  margin: 0 0vw 10px 10vw;
   font-family: "Noto Sans KR", sans-serif;
 }
 
