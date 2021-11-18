@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="../css/star-upload.css" />
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="../js/starUpload.js"></script>
+    <!--웹 아이콘 source-->
+    <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+    <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
     <!-- 화면 캡쳐 CDN -->
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
@@ -102,8 +105,8 @@
         <div class="share-button-group">
           <!--kakao url,link복사,이미지저장 버튼-->
           <input type="button" id="create-kakao-link-btn" class="kakako-button">
-          <input type="button" class="link-button" onclick="copyToClipboard()" data-html2canvas-ignore="true">
-          <input type="button" id="starDownload" class="save-button" data-html2canvas-ignore="true">
+          <span class="iconify" data-icon="eva:external-link-outline" onclick="copyToClipboard()" data-html2canvas-ignore="true" ></span>
+          <span class="iconify" data-icon="majesticons:folder-download-line" id="starDownload" data-html2canvas-ignore="true"></span>
         </div>
 
       </div>

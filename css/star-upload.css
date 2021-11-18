@@ -108,7 +108,8 @@
   font-size: 25px;
 }
 
-.share-button-group input{
+.share-button-group input ,.iconify{
+  color:#fdf7f7;
   width:30px;
   height:30px;
   background-size: 100%;
@@ -121,10 +122,8 @@
   background: url("https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png") no-repeat;
 }
 
-.link-button{
-  background: url(../image/link_icon.png) no-repeat;
-}
-
-.save-button{
-  background: url(../image/save_icon.png) no-repeat;
+.iconify{
+  offset-rotate : 90deg;
+  mask-clip : horizontal;
+  background : no-repeat;
 }
