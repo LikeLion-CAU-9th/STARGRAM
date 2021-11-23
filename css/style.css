@@ -5,6 +5,7 @@ body {
   padding: 0;
   color: #efefef;
   text-align: center;
+  overflow: hidden;
 }
 
 nav {
@@ -16,7 +17,7 @@ nav {
   padding-bottom: 10px; /* Due to the font */
 }
 
-.nav-title{
+.nav-title {
   font-size: 30px;
   letter-spacing: 3px;
   /* font-family: "Playfair Display", serif; */
@@ -49,6 +50,3 @@ nav {
     background-position: 200% center;
   }
 }
-
-
-
