@@ -52,7 +52,7 @@
   width: 80vw;
   /* (480*0.8) */
   max-width: 384px;
-  margin: 0 10px 10px 10vw;
+  margin: auto;
   font-family: "Noto Sans KR", sans-serif;
 }
 
@@ -78,53 +78,54 @@
   float: right;
   /* margin-right: 10vw; */
   margin-top: 20px;
-  
 }
 
-.title-real{
-  margin:15px;
+.title-real {
+  margin: 15px;
   font-family: "Yellowtail", cursive !important;
   font-size: 25px;
 }
 
-.date-real{
-  margin:30px 0px 10px 0px;
+.date-real {
+  margin: 30px 0px 10px 0px;
 }
 
-.place-real{
+.place-real {
   font-family: "Yellowtail", cursive !important;
   font-size: 20px;
 }
 
-.impression-real{
+.impression-real {
   display: inline-block;
-  margin:0px 0px 20px 0px;
-  padding:20px;
+  margin: 0px 0px 20px 0px;
+  padding: 20px;
   /* width: 60vw; */
-  font-weight:1000;
+  font-weight: 1000;
 }
 
-.impression-real span{
+.impression-real span {
   font-size: 25px;
 }
 
-.share-button-group input ,.iconify{
-  color:#fdf7f7;
-  width:30px;
-  height:30px;
+.share-button-group input,
+.iconify {
+  color: #fdf7f7;
+  width: 30px;
+  height: 30px;
   background-size: 100%;
-  border:none;
+  border: none;
   cursor: pointer;
-  margin:0px 5px 0px 5px;
+  margin: 0px 5px 0px 5px;
   vertical-align: middle;
 }
 
-.kakako-button{
-  background: url("https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png") no-repeat;
+.kakako-button {
+  background: url("https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png")
+    no-repeat;
 }
 
-.iconify{
-  offset-rotate : 90deg;
-  mask-clip : horizontal;
-  background : no-repeat;
+.iconify {
+  offset-rotate: 90deg;
+  mask-clip: horizontal;
+  background: no-repeat;
 }
