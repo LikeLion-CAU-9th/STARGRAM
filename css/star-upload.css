@@ -123,9 +123,3 @@
   background: url("https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png")
     no-repeat;
 }
-
-.iconify {
-  offset-rotate: 90deg;
-  mask-clip: horizontal;
-  background: no-repeat;
-}
