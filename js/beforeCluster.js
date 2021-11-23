@@ -62,6 +62,12 @@ const beforeCluster = () => {
 
 };
 
+const isCluster= () =>{
+    localStorage.setItem("isCluster", 0);
+    location.href = './star-upload.html';
+}
+
 window.onload = () =>{
     beforeCluster();
+    localStorage.setItem("isCluster", 1)
 };
