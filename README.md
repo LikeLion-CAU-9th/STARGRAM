@@ -27,10 +27,10 @@
 Figma, AdobeXD
 
 ## Front-End
-Three.js, exif.js, Kakao map API, Tmap API
+Three.js, exif.js, Raphael.js, Kakao map API
 
 ## Back-End
-Django, Kakao-REST-API, AWS
+Kakao-REST-API
 
 ## Communication
 Notion
