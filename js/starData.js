@@ -4,7 +4,7 @@ if (deviceWidth>480){
 } 
 WIDTH = (deviceWidth * 0.8) - 40;
 HEIGHT = WIDTH;
-CLUSTER_RATE= 2.5;
+CLUSTER_RATE= 5;
 
 const drawStar = (points) =>{
     var paper = Raphael(document.getElementById("container"),WIDTH,HEIGHT);
@@ -53,11 +53,6 @@ function changeY(y, minLat, maxLat) {
     let rate = (y - minLat) / (maxLat - minLat); 
     return HEIGHT * rate;  
 }
-
-// function changeY(y, minLat, minLon, maxLon) {
-//     let rate = (y - minLat) / (maxLon - minLon); 
-//     return HEIGHT * rate;  
-// }
 
 
 const changeToXY = (getMetaData) => {
@@ -112,32 +107,12 @@ const changeToXY = (getMetaData) => {
     return points;
 }
 
+
 function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min; //최댓값은 제외, 최솟값은 포함
 }
-
-window.onload = () =>{
-    let points;
-    if(localStorage.getItem("isCluster") == 1){
-        points = changeToXY("clusterMetaData")
-    }
-    else{
-        points = changeToXY("getMetaData")
-    }
-    
-    points.sort(function(){
-        return Math.random() - Math.random();
-    });
-
-    drawStar(points)
-
-    const maxLen = titleExample.length;
-    let i = getRandomInt(0, maxLen - 1);
-    document.querySelector(".star-upload-title").placeholder = titleExample[i];
-}
-
 
 
 const getCentroid = (points) => {
@@ -200,7 +175,6 @@ const clustering = (points) => {
 
 
 }
-
 
 
 // 나머지 데이터 저장하고 히든태그에 정보 넣어서 보여주기
