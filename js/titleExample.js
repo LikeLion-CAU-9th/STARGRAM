@@ -1,4 +1,4 @@
-module.exports = [
+const titleExample = [
   "Shining JEJU",
   "Blue Busan",
   "Healing Island 강화도",
