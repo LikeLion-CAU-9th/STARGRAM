@@ -21,7 +21,7 @@
       type="text/javascript"
       src="https://cdn.jsdelivr.net/npm/exif-js"
     ></script>
-    <script src="../js/starData.js"></script>
+    <!-- <script src="../js/starData.js"></script> -->
     <script src="../js/kakaoMap.js"></script>
   </head>
   <body>
@@ -34,7 +34,13 @@
         <div>이제 지도에 나온 위치를 이어서 별자리를 만들거에요ㅎㅎ</div>
         <div>동서남북으로 쫙쫙 늘려서 만들어지니 모양을 잘 기억해봐요!</div>
       </div>
-      <button class = "next-btn" onclick="location.href = './star-upload.html'">별자리 보기</button>
+      <button class = "next-btn" onclick="clickToStar()">별자리 보기</button>
     </section>
+    <script>
+      function clickToStar() {
+          localStorage.setItem('isCluster', 1);
+          location.href = './star-upload.html'
+        }
+    </script>
   </body>
 </html>
